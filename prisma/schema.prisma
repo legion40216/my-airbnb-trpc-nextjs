@@ -1,0 +1,134 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  // REMOVE the url line completely.
+  // Prisma will read it from prisma.config.ts
+}
+
+model User {
+  id             String        @id @default(uuid())
+  name           String
+  email          String        @unique
+  emailVerified  Boolean?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  sessions       Session[]
+  accounts       Account[]
+  listings       Listing[]
+  reservations   Reservation[]
+  favourites     Favourite[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(uuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id @default(uuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+
+model Listing {
+  id             String        @id @default(uuid())
+  title          String
+  description    String
+  imgSrc         String
+  createdAt      DateTime      @default(now())
+  category       String
+  roomCount      Int
+  bathroomCount  Int
+  guestCount     Int
+  locationValue  String
+  userId         String
+  price          Int
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reservations   Reservation[]
+  images         ListingImages[]
+  favouritedBy   Favourite[]
+
+  @@map("listing")
+}
+
+model ListingImages {
+  id         String    @id @default(uuid())
+  listingId  String
+  listing    Listing   @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  url        String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@map("listing_image")
+}
+
+model Favourite {
+  id         String   @id @default(uuid())
+  userId     String
+  listingId  String
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing    Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, listingId])
+  @@map("favourite")
+}
+
+model Reservation {
+  id         String    @id @default(uuid())
+  userId     String
+  listingId  String
+  startDate  DateTime
+  endDate    DateTime
+  totalPrice Int
+  createdAt  DateTime  @default(now())
+
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing    Listing   @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@map("reservation")
+}
