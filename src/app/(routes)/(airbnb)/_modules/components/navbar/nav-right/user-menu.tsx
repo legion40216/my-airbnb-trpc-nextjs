@@ -5,6 +5,7 @@ import { useAuthModalStore } from "@/hooks/useAuthModalStore";
 import { useCurrentUser } from "@/hooks/client-auth-utils";
 import { LogOut, LogIn, User } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import {
   DropdownMenu,
@@ -17,7 +18,6 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { toast } from "sonner"; // or your toast library
 
 export default function UserMenu() {
   const { openModal: openAuthModal } = useAuthModalStore();
