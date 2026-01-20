@@ -1,14 +1,13 @@
-// prisma/schema.prisma
-
 generator client {
   provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  // Point this to a folder inside your src directory
+  output   = "../src/generated/prisma" 
 }
 
 datasource db {
   provider = "postgresql"
-  // REMOVE the url line completely.
-  // Prisma will read it from prisma.config.ts
+  // Keep the url: env("DATABASE_URL") here so Vercel can see it!
+  url      = env("DATABASE_URL")
 }
 
 model User {
