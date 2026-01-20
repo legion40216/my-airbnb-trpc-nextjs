@@ -3,7 +3,7 @@ import { reservationServerSchema } from "@/schemas";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { Prisma } from "@/generated/prisma/client";
+import { Prisma } from "../../../../generated/prisma/client";
 
 export const reservationsRouter = createTRPCRouter({
   create: protectedProcedure
