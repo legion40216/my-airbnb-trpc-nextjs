@@ -1,5 +1,3 @@
-"use client";
-
 import ListingCard from "./listing-card";
 
 type ListingsItem = {
