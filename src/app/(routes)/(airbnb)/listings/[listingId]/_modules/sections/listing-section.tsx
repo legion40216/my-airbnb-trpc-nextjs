@@ -4,13 +4,13 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { categories } from "@/data/constants";
 import useCountries from "@/hooks/useCountries";
+import { useTRPC } from "@/trpc/react";
 
 import EmptyState from "@/components/global-ui/empty-state";
 import HeadingState from "@/components/global-ui/heading-state";
 import ListingImg from "../components/listing-img";
 import ListingInfo from "../components/listing-info";
 import ListingReservation from "../components/listing-reservation";
-import { useTRPC } from "@/trpc/react";
 
 export const ListingSectionContent = ({ listingId }: { listingId: string }) => {
   const trpc = useTRPC();
@@ -40,7 +40,7 @@ export const ListingSectionContent = ({ listingId }: { listingId: string }) => {
     locationRegion: country?.region,
     locationLabel: country?.label,
     price: listing.price || 0,
-    // Use the first image from the images array if available
+    userName: listing.user.name,
     imgSrc: listing.imgSrc
   };
 
@@ -82,6 +82,7 @@ export const ListingSectionContent = ({ listingId }: { listingId: string }) => {
           guestCount={formattedListing.guestCount}
           bathroomCount={formattedListing.bathroomCount}
           locationValue={listing.locationValue}
+          userName={formattedListing.userName}
         />
 
         <ListingReservation

@@ -1,7 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Category } from '@/types/type';
-
 
 interface ListingInfoProps {
   category: Category | undefined;
@@ -10,6 +8,7 @@ interface ListingInfoProps {
   guestCount: number;
   bathroomCount: number;
   locationValue: string;
+  userName: string
 }
 
 export default function ListingInfo({
@@ -18,35 +17,20 @@ export default function ListingInfo({
   roomCount,
   guestCount,
   bathroomCount,
-  locationValue
+  locationValue,
+  userName
 }: ListingInfoProps) {
   return (
     <div className="space-y-4">
       {/* Title */}
-   <div className="flex gap-2 items-center text-xl 
-        font-semibold"
-        >
-           {/*
-          <p>Hosted by {userName}</p>
-          <Avatar>
-            {userImg ? (
-              <AvatarImage src={userImg} />
-            ) : null}
-            <AvatarFallback>
-              {userName
-                ? userName.charAt(0)
-                : "?"}
-            </AvatarFallback>
-          </Avatar>
-        </div>
-*/}
-
-        <div className="flex gap-2 font-light text-neutral-500">
+      <div>
+        <h1 className="text-2xl font-bold">Hosted by {userName}</h1>
+        <div className="flex gap-2 font-light text-neutral-500 text-xl ">
           <p>{guestCount} guests</p>
           <p>{roomCount} rooms</p>
           <p>{bathroomCount} bathrooms</p>
         </div> 
-   </div> 
+    </div> 
 
       <Separator />
 
