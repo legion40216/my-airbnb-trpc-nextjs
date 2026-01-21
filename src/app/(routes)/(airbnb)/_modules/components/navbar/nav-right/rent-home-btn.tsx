@@ -25,7 +25,7 @@ export default function RentHomeBtn() {
     <Button
       variant="outline"
       onClick={handleClick}
-      className="rounded-full"
+      className="hidden md:flex rounded-full"
       size="lg"
       disabled={isPending}
       aria-label={user ? "List your property for rent" : "Sign in to list your property"}

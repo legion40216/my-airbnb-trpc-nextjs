@@ -12,8 +12,8 @@ export const searchParamsSchema = z.object({
   startDate: z.coerce.date().optional().catch(undefined),
   endDate: z.coerce.date().optional().catch(undefined),
 });
-
 export type SearchParamsValues = z.infer<typeof searchParamsSchema>;
+
 // You can also export just the category schema if you need it elsewhere
 export const categorySchema = z.enum(CATEGORY_LABELS);
 

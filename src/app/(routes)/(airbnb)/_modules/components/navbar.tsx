@@ -4,7 +4,7 @@ import NavRight from './navbar/nav-right'
 
 export default function Navbar() {
   return (
-    <div className='flex items-center justify-between pt-4'>
+    <div className='flex items-center justify-between pt-4 gap-2'>
         <NavLeft />
 
         <NavMain />

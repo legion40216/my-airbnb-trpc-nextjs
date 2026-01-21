@@ -4,7 +4,7 @@ export default function NavLeft() {
   return (
     <div>
       <Link href="/">
-        <h1 className='text-2xl font-bold'>AirbnbHub</h1>
+        <h1 className='text-lg md:text-2xl font-bold'>AirbnbHub</h1>
       </Link>
     </div>
   )

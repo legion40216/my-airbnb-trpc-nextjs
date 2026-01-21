@@ -3,7 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { useAuthModalStore } from "@/hooks/useAuthModalStore";
 import { useCurrentUser } from "@/hooks/client-auth-utils";
-import { LogOut, LogIn, User } from "lucide-react";
+import { LogOut, LogIn, User, Home } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -18,6 +18,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useMultiModalStore } from "@/hooks/useMultiModalStore";
 
 export default function UserMenu() {
   const { openModal: openAuthModal } = useAuthModalStore();
@@ -45,6 +46,17 @@ export default function UserMenu() {
     if (user?.name) return user.name.charAt(0).toUpperCase();
     return <User className="h-4 w-4" />;
   };
+
+  const { openModal } = useMultiModalStore();
+
+  const handleRentHome = () => {
+    if (user) {
+      openModal("rent");
+    } else {
+      openAuthModal("login");
+    }
+  };
+
 
   return (
     <DropdownMenu>
@@ -86,18 +98,24 @@ export default function UserMenu() {
             <DropdownMenuSeparator />
           </>
         )}
-
         {user ? (
           <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
             <LogOut className="mr-2 h-4 w-4" />
             <span>Log out</span>
-          </DropdownMenuItem>
+          </DropdownMenuItem> 
         ) : (
           <DropdownMenuItem onClick={handleLogin} className="cursor-pointer">
             <LogIn className="mr-2 h-4 w-4" />
             <span>Sign in</span>
           </DropdownMenuItem>
         )}
+        <DropdownMenuItem
+          onClick={handleRentHome}
+          className="cursor-pointer md:hidden"
+        >
+          <Home className="mr-2 h-4 w-4" />
+          <span>{user ? "Rent your home" : "Airbnb your home"}</span>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

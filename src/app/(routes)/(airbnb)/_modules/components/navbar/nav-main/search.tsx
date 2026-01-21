@@ -1,7 +1,7 @@
 "use client";
 import { useMemo } from "react";
 import { SearchIcon } from "lucide-react";
-import { differenceInDays, format } from "date-fns";
+import { differenceInDays } from "date-fns";
 import { useSearchParams } from "next/navigation";
 
 import useCountries from "@/hooks/useCountries";
@@ -60,8 +60,8 @@ export default function Search() {
   return (
     <button
       type="button"
-      className="flex items-center justify-between gap-2 w-full 
-        md:w-auto px-4 py-2 shadow-sm hover:shadow-md transition-shadow
+      className="flex items-center justify-between gap-2 
+        px-4 py-2 shadow-sm hover:shadow-md transition-shadow
         border border-gray-300 rounded-full cursor-pointer
         bg-white focus:outline-none focus:ring-2 focus:ring-rose-500 
         focus:ring-offset-2"
