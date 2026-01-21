@@ -37,8 +37,8 @@ export const ListingSectionContent = ({ listingId }: { listingId: string }) => {
     roomCount: listing.roomCount,
     bathroomCount: listing.bathroomCount,
     guestCount: listing.guestCount,
-    locationRegion: country?.region,
-    locationLabel: country?.label,
+    locationRegion: country?.region ?? "Unknown Region",
+    locationLabel: country?.label ?? "Unknown Location",
     price: listing.price || 0,
     userName: listing.user.name,
     imgSrc: listing.imgSrc

@@ -46,8 +46,8 @@ const FavouritesSectionContent = () => {
     const country = getByValue(item.listing.locationValue);
     return {
       id: item.listing.id,
-      locationRegion: country?.region || '',
-      locationLabel: country?.label || '',
+      locationRegion: country?.region ?? "Unknown Region",
+      locationLabel: country?.label ?? "Unknown Location",
       imgSrc: item.listing.imgSrc,
       category: item.listing.category,
       price: formatter.format(item.listing.price),
