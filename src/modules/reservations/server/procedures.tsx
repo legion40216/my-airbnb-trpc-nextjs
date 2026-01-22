@@ -2,8 +2,8 @@ import prisma from "@/lib/prismadb";
 import { reservationServerSchema } from "@/schemas";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
-import { z } from "zod";
 import { Prisma } from "../../../../generated/prisma/client";
+import { z } from "zod";
 
 export const reservationsRouter = createTRPCRouter({
   create: protectedProcedure
@@ -79,7 +79,7 @@ export const reservationsRouter = createTRPCRouter({
       const reservations = await prisma.reservation.findMany({
         where: {
           listing: {
-            userId: userId, // <-- only fetch reservations on your listings
+            userId: userId,
           },
         },
         include: {
